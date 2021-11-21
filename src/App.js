@@ -1,54 +1,20 @@
 // import logo from './logo.svg';
 import './App.css';
-import restaurant from './restaurant.jpg';
 
-function Header(props) {
-  return (
-    <header>
-      <h1>{props.name}'s Kitchen</h1>
-    </header>
-  )
+function SecretComponent() {
+  return <h1>Secret information for authorised users only</h1>
 }
 
-function Main(props) {
-  return (
-    <section>
-      <p>We serve the most {props.adjective} foods around</p>
-      <img src={restaurant} height={200} alt="The Veg Plater" />
-      <ul style={{textAlign: 'left'}}>
-        {props.dishes.map((dish) => <li key={dish.id}>{dish.title}</li>)}
-      </ul>
-    </section>
-  )
+function RegularComponent() {
+  return <h1>Everyone can see this component.</h1>
 }
 
-function Footer(props) {
+function App(props) {
   return (
-    <footer>
-      <p>Copyright {props.year}</p>
-    </footer>
+    <>
+      {props.authorized ? <SecretComponent /> : <RegularComponent />}
+    </>
   )
-}
-
-const dishes = [
-  "Macaroni and Cheese",
-  "Salmon",
-  "Pizza with Vegetables",
-  "Spaghetti",
-  "Ice Cream",
-  "Cake"
-];
-
-const dishObjects = dishes.map((dish, i) => ({ id: i, title: dish}));
-
-function App() {
-  return (
-    <div className="App">
-        <Header name="Lazh" />
-        <Main adjective="amazing" dishes={dishObjects} />
-        <Footer year={new Date().getFullYear()} />
-    </div>
-  );
 }
 
 export default App;
