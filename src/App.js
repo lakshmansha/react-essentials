@@ -1,18 +1,32 @@
-// import logo from './logo.svg';
+import { useState, useEffect } from 'react'
 import './App.css';
 
-function SecretComponent() {
-  return <h1>Secret information for authorised users only</h1>
-}
-
-function RegularComponent() {
-  return <h1>Everyone can see this component.</h1>
-}
-
 function App(props) {
+  const [emotion, setEmotion] = useState("happy");
+  const [secondary, setSecondary] =useState('tired');
+  useEffect(() => {
+    console.log(`It's ${emotion} around here`);
+  }, [emotion]);
+
+  useEffect(() => {
+    console.log(`It's ${secondary} around here`);
+  }, [secondary])
+
   return (
     <>
-      {props.authorized ? <SecretComponent /> : <RegularComponent />}
+      <h1>Current emotion is {emotion} and {secondary}</h1>
+      <button onClick={() => setEmotion('happy')}>
+        Happy
+      </button>
+      <button onClick={() => setSecondary('crabby')}>
+        Make Crabby
+      </button>
+      <button onClick={() => setEmotion('frustrated')}>
+        Frustrate
+      </button>
+      <button onClick={() => setEmotion('enthusiastic')}>
+        Enthuse
+      </button>
     </>
   )
 }
